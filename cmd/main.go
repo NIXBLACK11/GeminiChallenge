@@ -12,7 +12,7 @@ func main() {
 	mux := mux.NewRouter()
 	port := 8080
 
-	mux.HandleFunc("/signup", routes.EssayRoute)
+	mux.HandleFunc("/getJobs", routes.JobsRoute)
 
 	// CORS middleware
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})

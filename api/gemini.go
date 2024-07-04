@@ -2,32 +2,32 @@ package api
 
 import (
 	"context"
+	"errors"
 	"fmt"
-	"log"
 	"os"
 	"github.com/joho/godotenv"
 	"github.com/google/generative-ai-go/genai"
 	"google.golang.org/api/option"
 )
 
-func GetGemini() {
+func GetGemini(input string) (string, error){
 	ctx := context.Background()
 	// Access your API key as an environment variable (see "Set up your API key" above)
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Error loading .env file")
+		return "", errors.New("Error loading .env file")
 	}
 	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("GEMINI_API_KEY")))
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 	defer client.Close()
 
 	// The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 	model := client.GenerativeModel("gemini-1.5-flash")
-	resp, err := model.GenerateContent(ctx, genai.Text("Write a story about a magic backpack."))
+	resp, err := model.GenerateContent(ctx, genai.Text(input))
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	if resp!=nil {
@@ -37,15 +37,18 @@ func GetGemini() {
 				content := candidate.Content
 				if content!=nil {
 					text := content.Parts[0]
-					fmt.Println("Gemini output: ", text)
+					fmt.Println(text)
+					// return string(text), nil
 				} else {
-					fmt.Println("content is nil")
+					return "", errors.New("content returned nil")
 				}
 			}
 		} else {
-			fmt.Println("candidates is nil")
+			return "", errors.New("candidates is nil")
 		}
 	} else {
-		fmt.Println("Error in response")
+		return "", errors.New("Error in response")
 	}
+
+	return "", errors.New("Internal error")
 }
