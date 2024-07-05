@@ -1,5 +1,9 @@
 package models
 
-type Request struct {
-	resume string `json:"resume"`
+type TextMessage string
+
+type TextResponse string
+
+type RequestType struct {
+	Resume string `json:"resume"`
 }
