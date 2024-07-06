@@ -29,7 +29,10 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Server Error", http.StatusBadRequest)
 		}
 
-		
+		switch p := text.(type) {
+		case *genai.Blob:
+			fmt.Printf("Blob Data: %v\n", p.Data)
+		}
 
 		w.WriteHeader(http.StatusOK)
 		response := map[string]genai.Part{"message": text}
