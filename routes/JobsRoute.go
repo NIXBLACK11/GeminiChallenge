@@ -7,6 +7,8 @@ import (
 
 	"fmt"
 	"net/http"
+
+	"github.com/google/generative-ai-go/genai"
 )
 
 func JobsRoute(w http.ResponseWriter, r *http.Request) {
@@ -26,11 +28,11 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			http.Error(w, "Server Error", http.StatusBadRequest)
 		}
-		fmt.Println("API response2")
-		fmt.Println(text)
+
+		
 
 		w.WriteHeader(http.StatusOK)
-		response := map[string]string{"message": "Request Parsed"}
+		response := map[string]genai.Part{"message": text}
 		json.NewEncoder(w).Encode(response)
 	} else {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)

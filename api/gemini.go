@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	"errors"
-	"fmt"
 	"os"
 	"github.com/joho/godotenv"
 	"github.com/google/generative-ai-go/genai"
@@ -27,10 +26,13 @@ func GetGeminiResponse(Resume string) (genai.Part, error){
 	model := client.GenerativeModel("gemini-1.5-flash")
 
 	// Creating the input
-	input := "This is my resume: "+Resume+" \nAnd these are the tags of the jobs I want to find: "
+	input := "This is my resume: "+Resume
 
-	input+="\nbased on these data give me the tags for job search Example: the language, experience so that I can do the google search."
+	input+="\nbased on these data give me the tags for job search Example: the language, experience so that I can do the google search.Gove just tags and , seperated and give tags like intern or junior mid expert etc based on the resume"
 
+	input+="This is the format I want ->Languages:JavaScript,TypeScript\nFrameworksLibraries:React,Next.js\nDatabases:MongoDB,MySQL\nToolsPlatforms:Git,GitHub\nExperienceLevel:Intern,Junior\nSkills:NLP,CI/CD"
+
+	input+="The output should not have * in it and any other text other than the format"
 	resp, err := model.GenerateContent(ctx, genai.Text(input))
 	if err != nil {
 		return nil, err
@@ -44,8 +46,6 @@ func GetGeminiResponse(Resume string) (genai.Part, error){
 				content := candidate.Content
 				if content!=nil {
 					text := content.Parts[0]
-					fmt.Println("API response")
-					fmt.Println(text)
 					return text, nil
 				} else {
 					return nil, errors.New("content returned nil")
