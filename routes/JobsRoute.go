@@ -7,8 +7,6 @@ import (
 
 	"fmt"
 	"net/http"
-
-	"github.com/google/generative-ai-go/genai"
 )
 
 func JobsRoute(w http.ResponseWriter, r *http.Request) {
@@ -26,16 +24,20 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 
 		if err!=nil {
 			fmt.Println(err)
-			http.Error(w, "Server Error", http.StatusBadRequest)
+			http.Error(w, "Error in gemini api", http.StatusBadRequest)
 		}
 
-		switch p := text.(type) {
-		case *genai.Blob:
-			fmt.Printf("Blob Data: %v\n", p.Data)
+		result, err := api.GetGoogleResponse(`intext:"golang" intext:"internship"`)
+
+		if err!=nil {
+			fmt.Println(err)
+			http.Error(w, "Error in google api", http.StatusBadRequest)
 		}
+
+		fmt.Println(result)
 
 		w.WriteHeader(http.StatusOK)
-		response := map[string]genai.Part{"message": text}
+		response := map[string]string{"message": text}
 		json.NewEncoder(w).Encode(response)
 	} else {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)

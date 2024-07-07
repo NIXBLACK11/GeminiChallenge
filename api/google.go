@@ -39,13 +39,11 @@ type ReturnData struct {
 	Link string
 }
 
-func getLinks() ([]ReturnData, error){
+func GetGoogleResponse(query string) ([]ReturnData, error){
 	er := godotenv.Load()
 	if er != nil {
 		return nil, errors.New("error loading .env file")
 	}
-	
-	query := `intext:"golang" intext:"internship"`
 
 	GOOGLE_API_KEY := os.Getenv("GOOGLE_API_KEY")
 	SEARCH_ENGINE_ID := os.Getenv("SEARCH_ENGINE_ID")
@@ -85,12 +83,7 @@ func getLinks() ([]ReturnData, error){
 
 	var Results []ReturnData
 
-	fmt.Printf("Search Results:\n")
 	for _, item := range result.Items {
-		fmt.Printf("Title: %s\n", item.Title)
-		fmt.Printf("Link: %s\n", item.Link)
-		fmt.Printf("Snippet: %s\n\n", item.Snippet)
-		
 		rd := ReturnData{
 			Title: item.Title,
 			Link:  item.Link,
