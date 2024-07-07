@@ -3,6 +3,7 @@ package routes
 import (
 	"GeminiChallenge/api"
 	"GeminiChallenge/models"
+	"GeminiChallenge/utils"
 	"encoding/json"
 
 	"fmt"
@@ -27,17 +28,23 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error in gemini api", http.StatusBadRequest)
 		}
 
-		result, err := api.GetGoogleResponse(`intext:"golang" intext:"internship"`)
+		searchValues := utils.GetSearchValues(text)
 
-		if err!=nil {
-			fmt.Println(err)
-			http.Error(w, "Error in google api", http.StatusBadRequest)
+		var results []api.ReturnData
+
+		for _, searchValue := range searchValues {
+			result, err := api.GetGoogleResponse(searchValue)
+
+			if err!=nil {
+				fmt.Println(err)
+				http.Error(w, "Error in google api", http.StatusBadRequest)
+			}
+
+			results = append(results, result...)
 		}
 
-		fmt.Println(result)
-
 		w.WriteHeader(http.StatusOK)
-		response := map[string]string{"message": text}
+		response := map[string][]api.ReturnData{"message": results}
 		json.NewEncoder(w).Encode(response)
 	} else {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
