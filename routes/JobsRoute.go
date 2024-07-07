@@ -28,7 +28,11 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error in gemini api", http.StatusBadRequest)
 		}
 
-		searchValues := utils.GetSearchValues(text)
+		searchValues := utils.GetSearchValues(text, request.Tags)
+
+		for _, val := range searchValues {
+			fmt.Println(val)
+		}
 
 		var results []api.ReturnData
 

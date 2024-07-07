@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func GetSearchValues(text string) []string {
+func GetSearchValues(text string, tags []string) []string {
 	// Splitting the data into categories
 	categories := make(map[string][]string)
 	lines := strings.Split(text, "\n")
@@ -50,6 +50,17 @@ func GetSearchValues(text string) []string {
 			searchQuery := fmt.Sprintf("%s intext:\"%s\" intext:\"job\"", query, level)
 			result = append(result, searchQuery)
 		}
+	}
+	
+	// Create a tag string
+	var tagString string
+	for _, tag := range tags {
+		tagString += " intext:\""+tag+"\""
+	}
+
+	// Add tags to each query
+	for i:=0; i<len(result);i++ {
+		result[i] += tagString
 	}
 
 	return result
