@@ -2,7 +2,7 @@ package api
 
 import (
 	"encoding/json"
-	"errors"
+	// "errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 )
 
 type SearchResult struct {
@@ -49,10 +49,10 @@ type ReturnData struct {
 }
 
 func GetGoogleResponse(query string) ([]ReturnData, error) {
-	er := godotenv.Load()
-	if er != nil {
-		return nil, errors.New("error loading .env file")
-	}
+	// er := godotenv.Load()
+	// if er != nil {
+	// 	return nil, errors.New("error loading .env file")
+	// }
 
 	GOOGLE_API_KEY := os.Getenv("GOOGLE_API_KEY")
 	SEARCH_ENGINE_ID := os.Getenv("SEARCH_ENGINE_ID")

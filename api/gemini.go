@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"os"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	"github.com/google/generative-ai-go/genai"
 	"google.golang.org/api/option"
 )
@@ -12,10 +12,10 @@ import (
 func GetGeminiResponse(Resume string) (string, error) {
 	ctx := context.Background()
 	// Access your API key as an environment variable
-	err := godotenv.Load()
-	if err != nil {
-		return "", errors.New("error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	return "", errors.New("error loading .env file")
+	// }
 	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("GEMINI_API_KEY")))
 	if err != nil {
 		return "", err
