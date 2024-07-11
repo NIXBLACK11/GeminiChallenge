@@ -1,6 +1,6 @@
 module GeminiChallenge
 
-go 1.22.4
+go 1.22.3
 
 require google.golang.org/api v0.183.0
 
