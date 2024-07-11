@@ -48,7 +48,7 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		response := map[string][]api.ReturnData{"message": results}
+		response := results
 		json.NewEncoder(w).Encode(response)
 	} else {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
