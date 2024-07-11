@@ -36,7 +36,11 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 
 		var results []api.ReturnData
 
+		i := 0
 		for _, searchValue := range searchValues {
+			if i==1 {
+				break
+			}
 			result, err := api.GetGoogleResponse(searchValue)
 
 			if err!=nil {
@@ -45,6 +49,7 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			}
 
 			results = append(results, result...)
+			i=i+1
 		}
 
 		fmt.Println(results)

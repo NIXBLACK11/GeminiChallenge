@@ -42,10 +42,10 @@ type Item struct {
 }
 
 type ReturnData struct {
-	Title string `json:"title"`
-	Link  string `json:"link"`
-	Image string `json:"image"`
-	Description string `json:"snippet"`
+	Title string `json:"Title"`
+	Link  string `json:"Link"`
+	Image string `json:"Image"`
+	Description string `json:"Description"`
 }
 
 func GetGoogleResponse(query string) ([]ReturnData, error) {
