@@ -45,6 +45,7 @@ type ReturnData struct {
 	Title string `json:"title"`
 	Link  string `json:"link"`
 	Image string `json:"image"`
+	Description string `json:"snippet"`
 }
 
 func GetGoogleResponse(query string) ([]ReturnData, error) {
@@ -102,6 +103,7 @@ func GetGoogleResponse(query string) ([]ReturnData, error) {
 			Title: item.Title,
 			Link:  item.Link,
 			Image: imageSrc,
+			Description: item.Snippet,
 		}
 		Results = append(Results, rd)
 	}
