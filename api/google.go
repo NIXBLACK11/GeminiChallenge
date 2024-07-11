@@ -39,7 +39,6 @@ type Item struct {
 	Snippet     string  `json:"snippet"`
 	HTMLSnippet string  `json:"htmlSnippet"`
 	Pagemap     Pagemap `json:"pagemap"`
-	ImageSrc    string  `json:"imageSrc,omitempty"`
 }
 
 type ReturnData struct {
@@ -91,10 +90,11 @@ func GetGoogleResponse(query string) ([]ReturnData, error) {
 	}
 
 	var Results []ReturnData
+	defaultImageSrc := "https://picsum.photos/300/200"
 
 	for _, item := range result.Items {
-		imageSrc := ""
-		if len(item.Pagemap.CSEImage) > 0 {
+		imageSrc := defaultImageSrc
+		if len(item.Pagemap.CSEImage) > 0 && item.Pagemap.CSEImage[0].Src != "" {
 			imageSrc = item.Pagemap.CSEImage[0].Src
 		}
 

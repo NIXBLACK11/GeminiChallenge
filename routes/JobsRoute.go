@@ -47,6 +47,8 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			results = append(results, result...)
 		}
 
+		fmt.Println(results)
+
 		w.WriteHeader(http.StatusOK)
 		response := results
 		json.NewEncoder(w).Encode(response)
