@@ -24,22 +24,31 @@ type SearchResult struct {
 	} `json:"searchInformation"`
 }
 
+type Pagemap struct {
+	CSEImage []struct {
+		Src string `json:"src"`
+	} `json:"cse_image"`
+}
+
 type Item struct {
-	Kind        string `json:"kind"`
-	Title       string `json:"title"`
-	HTMLTitle   string `json:"htmlTitle"`
-	Link        string `json:"link"`
-	DisplayLink string `json:"displayLink"`
-	Snippet     string `json:"snippet"`
-	HTMLSnippet string `json:"htmlSnippet"`
+	Kind        string  `json:"kind"`
+	Title       string  `json:"title"`
+	HTMLTitle   string  `json:"htmlTitle"`
+	Link        string  `json:"link"`
+	DisplayLink string  `json:"displayLink"`
+	Snippet     string  `json:"snippet"`
+	HTMLSnippet string  `json:"htmlSnippet"`
+	Pagemap     Pagemap `json:"pagemap"`
+	ImageSrc    string  `json:"imageSrc,omitempty"`
 }
 
 type ReturnData struct {
-	Title string
-	Link string
+	Title string `json:"title"`
+	Link  string `json:"link"`
+	Image string `json:"image"`
 }
 
-func GetGoogleResponse(query string) ([]ReturnData, error){
+func GetGoogleResponse(query string) ([]ReturnData, error) {
 	er := godotenv.Load()
 	if er != nil {
 		return nil, errors.New("error loading .env file")
@@ -84,9 +93,15 @@ func GetGoogleResponse(query string) ([]ReturnData, error){
 	var Results []ReturnData
 
 	for _, item := range result.Items {
+		imageSrc := ""
+		if len(item.Pagemap.CSEImage) > 0 {
+			imageSrc = item.Pagemap.CSEImage[0].Src
+		}
+
 		rd := ReturnData{
 			Title: item.Title,
 			Link:  item.Link,
+			Image: imageSrc,
 		}
 		Results = append(Results, rd)
 	}
