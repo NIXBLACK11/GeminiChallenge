@@ -30,9 +30,9 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 
 		searchValues := utils.GetSearchValues(text, request.Tags)
 
-		for _, val := range searchValues {
-			fmt.Println(val)
-		}
+		// for _, val := range searchValues {
+		// 	fmt.Println(val)
+		// }
 
 		var results []api.ReturnData
 
@@ -47,7 +47,7 @@ func JobsRoute(w http.ResponseWriter, r *http.Request) {
 			results = append(results, result...)
 		}
 
-		fmt.Println(results)
+		// fmt.Println(results)
 
 		w.WriteHeader(http.StatusOK)
 		response := results
