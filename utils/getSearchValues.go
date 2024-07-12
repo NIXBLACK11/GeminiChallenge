@@ -51,7 +51,10 @@ func GetSearchValues(text string, tags []string) []string {
 			result = append(result, searchQuery)
 		}
 	}
-	
+
+	// Tags to remove from search
+	remove := "-linkedin -naukri -indeed -intershala -blog -freecodecamp"
+
 	// Create a tag string
 	var tagString string
 	for _, tag := range tags {
@@ -60,7 +63,7 @@ func GetSearchValues(text string, tags []string) []string {
 
 	// Add tags to each query
 	for i:=0; i<len(result);i++ {
-		result[i] += tagString
+		result[i] += tagString + remove
 	}
 
 	return result
