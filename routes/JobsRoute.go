@@ -13,6 +13,7 @@ import (
 func JobsRoute(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		
+		fmt.Println("Request received")
 		var request models.RequestType
 
 		err := json.NewDecoder(r.Body).Decode(&request)
