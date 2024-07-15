@@ -65,6 +65,7 @@ Joblinker is a comprehensive job matching platform designed to provide relevant 
    ```
 
 ### Frontend
+[Frontend Code](https://github.com/yourusername/GeminiChallengeFrontend)
 
 1. Clone the repository:
 
