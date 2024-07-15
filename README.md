@@ -10,7 +10,6 @@ Joblinker is a comprehensive job matching platform designed to provide relevant 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
