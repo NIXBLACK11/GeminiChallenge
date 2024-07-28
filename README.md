@@ -1,5 +1,7 @@
 # Joblinker
 
+[Live](https://nixjoblinker.vercel.app/)
+
 Joblinker is a comprehensive job matching platform designed to provide relevant job opportunities based on user resumes and preferences. This project leverages Golang for the backend, TypeScript for the frontend, and integrates advanced tools such as Gemini and the Google Search API.
 
 ## Table of Contents
