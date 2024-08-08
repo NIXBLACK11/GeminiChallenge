@@ -63,7 +63,16 @@ Joblinker is a comprehensive job matching platform designed to provide relevant 
    go mod download
    ```
 
-3. Start the backend server:
+3. Configure the API KEYS:
+   - Follow these [steps](STEPSAPI.md) to get the api keys.
+
+   ```bash
+   export GEMINI_API_KEY=<gemini_api_key>
+   export GOOGLE_API_KEY=<google_api_key>
+   export SEARCH_ENGINE_ID=<search_engine_id>
+   ```
+
+4. Start the backend server:
 
    ```bash
    go run ./cmd/main.go
