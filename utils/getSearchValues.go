@@ -53,7 +53,7 @@ func GetSearchValues(text string, tags []string) []string {
 	}
 
 	// Tags to remove from search
-	remove := "-linkedin -naukri -indeed -intershala -blog -freecodecamp"
+	remove := "-linkedin -naukri -indeed -intershala -blog -freecodecamp -reddit"
 
 	// Create a tag string
 	var tagString string
