@@ -1,6 +1,6 @@
 # Joblinker
 
-[Live](https://nixjoblinker.vercel.app/)
+[Live](jobs.nixblack.site)
 ### Note: 
 - The seacrh may take time as the backend is deployed on a free instance.
 - If even after a long time there are no results the search API maximum limit might have been exceeded. 
